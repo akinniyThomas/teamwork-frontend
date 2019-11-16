@@ -11,6 +11,8 @@ class App extends React.Component {
       pageNumber: 1,
       user : {
         userId: 0,
+        userFirstName: '',
+        userLastName: '',
         token: '',
         administrator: false
       }
@@ -28,7 +30,10 @@ class App extends React.Component {
       user: {
         userId: user.userId,
         token: user.token,
-        administrator: user.administrator
+        administrator: user.administrator,
+        userFirstName: user.firstname,
+        userLastName: user.lastname,
+        userStaffNumber: user.staffnumber
       }
     });
   }
