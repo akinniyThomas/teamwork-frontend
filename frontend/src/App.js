@@ -11,8 +11,9 @@ class App extends React.Component {
       pageNumber: 1,
       user : {
         userId: 0,
-        userFirstName: '',
-        userLastName: '',
+        firstname: '',
+        lastname: '',
+        staffnumber: '',
         token: '',
         administrator: false
       }
@@ -31,20 +32,35 @@ class App extends React.Component {
         userId: user.userId,
         token: user.token,
         administrator: user.administrator,
-        userFirstName: user.firstname,
-        userLastName: user.lastname,
-        userStaffNumber: user.staffnumber
+        firstname: user.firstname,
+        lastname: user.lastname,
+        staffnumber: user.staffnumber
       }
     });
   }
 
   render() {
     let page;
+    let fullName;
+    let logOutIn;
     if(this.state.pageNumber === 1) page = <SignIn  change = {this.setPageNumber} user = {this.setUser}/>
-    else if(this.state.pageNumber === 2) page = <SignUp change = {this.setPageNumber}/>
-    else page = <Home change = {this.setPageNumber} user = {this.state.user}/>
+    else if(this.state.pageNumber === 2) {
+      fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
+      logOutIn = 'Logout';
+      page = <SignUp change = {this.setPageNumber}/>
+    }
+    else {
+      fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
+      logOutIn = 'Logout';
+      page = <Home change = {this.setPageNumber} user = {this.state.user}/>
+    }
   return (
     <div  className="App">
+      <div>
+        <span>TeamWork</span>
+        <span>{logOutIn}</span>
+        <span>{fullName}</span>
+      </div>
       {page}
     </div>
   );}

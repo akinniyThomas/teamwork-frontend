@@ -10,8 +10,8 @@ class SignIn extends React.Component {
         }
     }
 
-    makeRequests = async (verb, api, data, token) => {
-        if (verb === 'POST') {
+    makeRequests = async (verb, api, data, token, isSignin) => {
+        if (verb === 'POST' && isSignin) {
         const response = await fetch(api, {
                 method: verb,
                 body: JSON.stringify(data),
@@ -45,13 +45,13 @@ class SignIn extends React.Component {
                 password: this.state.password
             };
             const postAPI = 'http://localhost:8000/api/v1/auth/signin';
-            const jsonResponse = await this.makeRequests('POST', postAPI, data, '');
+            const jsonResponse = await this.makeRequests('POST', postAPI, data, '', true);
             if (jsonResponse.status === 'success') {
                 const {userId, token, administrator} = jsonResponse.data;
                 const userID = userId; 
                 const getAPI = `http://localhost:8000/api/v1/auth/users/${userID}`;
                 
-                const userGetResponse = await this.makeRequests('GET', getAPI, JSON.stringify({userId: userId}), token);
+                const userGetResponse = await this.makeRequests('GET', getAPI, JSON.stringify({userId: userId}, false), token);
                 const user = {
                     userId,
                     token,
