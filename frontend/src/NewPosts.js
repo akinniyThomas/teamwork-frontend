@@ -66,7 +66,7 @@ class NewPosts extends React.Component {
             </div>
         } else {
             page = <div>
-                <form onSubmit = {this.props.postPosts(this.state.feed, this.state.title, this.state.inappropflag, this.state.authorid, this.state.tagid, this.state.selectedFile, this.props.artORgif)}>
+                <form onSubmit = {this.MakePost}>
                     <input type = 'text' value = {this.state.title} onChange = {this.setData} name = 'title'/>
                     <input type = 'file' onChange = {this.setFile} name = 'file'/>
                     <select value = {this.state.tag} onChange = {this.setData} name = 'tag'>

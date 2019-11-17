@@ -36,14 +36,18 @@ class Home extends React.Component {
     makeRequests = async (verb, api, data, token, upload) => {
         if (verb === 'POST' && upload) {
             const uploadData = new FormData();
-            // uploadData.append
+            uploadData.append('inappropflag', data.inappropflag);
+            uploadData.append('upload file', data.selectedFile);
+            uploadData.append('title', data.title);
+            uploadData.append('tagid', data.tagid);
+            uploadData.append('authorid', data.authorid);
         const response = await fetch(api, {
                 method: verb,
                 headers: {
                     // 'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization' : `Bearer ${token}`
                 },
-                body: data
+                body: uploadData
             });
             return await response.json();
         } else if (verb === 'GET') {
@@ -140,6 +144,7 @@ class Home extends React.Component {
     render() {
         let feed; let show = 'Show Feeds'; let radioButtons;
         let newPost; let NewPost;
+        // let createUser;
         radioButtons = <RadioButtons selectedState = {this.state.selectedState} setCheckedState = {this.setCheckedState}/>
         if (this.state.showFeeds) {
             feed = this.state.feeds.map((feed) => {
@@ -153,7 +158,7 @@ class Home extends React.Component {
             );
             newPost = <label onClick = {(e) => this.setPostPage('article')}>Post New Article</label>
         } else if (!this.state.showFeeds && this.state.selectedState === 'gifState') {
-            feed = this.state.articles.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
+            feed = this.state.gifs.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
             );
             newPost = <label onClick = {(e) => this.setPostPage('gif')}>Post New Gif</label>;
         }

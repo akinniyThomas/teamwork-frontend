@@ -22,6 +22,8 @@ class App extends React.Component {
     // this.changePage = this.changePage.bind(this);
   }
 
+  userPage = (e) => {console.log('here');this.setPageNumber(2);}
+
   setPageNumber = (pageNumber) => {
     this.setState({pageNumber: pageNumber});
     console.log(this.state.pageNumber);
@@ -41,9 +43,7 @@ class App extends React.Component {
   }
 
   render() {
-    let page;
-    let fullName;
-    let logOutIn;
+    let page; let fullName; let logOutIn; let createUser;
     if(this.state.pageNumber === 1) page = <SignIn  change = {this.setPageNumber} user = {this.setUser}/>
     else if(this.state.pageNumber === 2) {
       fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
@@ -59,10 +59,12 @@ class App extends React.Component {
       logOutIn = 'Logout';
       page = <OneFeed change = {this.setPageNumber} user = {this.state.user}/>
     }
+    if (this.state.user.administrator) createUser = 'Create New User';
   return (
     <div  className="App">
       <div>
         <span>TeamWork</span>
+        <span onClick = {this.userPage}>{createUser}</span>
         <span>{logOutIn}</span>
         <span>{fullName}</span>
       </div>
