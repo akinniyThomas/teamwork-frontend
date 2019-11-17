@@ -33,14 +33,21 @@ class Home extends React.Component {
         postPage: null
     });
 
-    makeRequests = async (verb, api, data, token, isSignin) => {
-        if (verb === 'POST' && isSignin) {
+    makeRequests = async (verb, api, data, token, upload) => {
+        if (verb === 'POST' && upload) {
+            const uploadData = new FormData();
+            uploadData.append('inappropflag', data.inappropflag);
+            uploadData.append('upload file', data.selectedFile);
+            uploadData.append('title', data.title);
+            uploadData.append('tagid', data.tagid);
+            uploadData.append('authorid', data.authorid);
         const response = await fetch(api, {
                 method: verb,
-                body: JSON.stringify(data),
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization' : `Bearer ${token}`
+                },
+                body: uploadData
             });
             return await response.json();
         } else if (verb === 'GET') {
@@ -53,7 +60,7 @@ class Home extends React.Component {
                 }
             });
             return await response.json();
-        } else if((verb === 'POST' && !isSignin) || verb === 'PATCH' || 'DELETE') {
+        } else if((verb === 'POST' && !upload) || (verb === 'PATCH' && !upload) || 'DELETE') {
             const response = await fetch(api, {
                 method: verb,
                 body: JSON.stringify(data),
@@ -69,9 +76,9 @@ class Home extends React.Component {
     getFeeds = async () => {
         const api = 'http://localhost:8000/api/v1/feed';
         const token = this.props.user.token;
-        const param = {
-            userId: this.props.user.userId
-        }
+        // const param = {
+        //     userId: this.props.user.userId
+        // }
         const feedsGotten = await this.makeRequests('GET', api, '', token, false);
         if (feedsGotten.status === 'success') {
             const feed = feedsGotten.data;
@@ -98,7 +105,37 @@ class Home extends React.Component {
         }
     }
 
-    newPoster = (post) => <NewPosts user = {this.props.user} artORgif = {post}/>
+    newPoster = (post) => <NewPosts user = {this.props.user} artORgif = {post} postPosts = {this.postPosts}/>
+
+    postPosts = async (feeds, title, inappropflag, authorid, tagid, selectedFiles, artORgif) => {
+        let feed; let api; let selectedFile;
+        if (artORgif === 'article') {
+            feed = feeds;
+            api = 'http://localhost:8000/api/v1/articles';
+            selectedFile = null;
+        } else {
+            feed = '';
+            api = 'http://localhost:8000/api/v1/gifs';
+            selectedFile = selectedFiles;
+        }
+        const data = {
+            title,
+            inappropflag,
+            authorid,
+            tagid,
+            feed,
+            selectedFile
+        }
+        const token = this.props.user.token;
+        console.log(data);
+        let response;
+        if (artORgif === 'gif')
+        response = await this.makeRequests('POST', api, data, token, true);
+        else response = await this.makeRequests('POST', api, data, token, false);
+        if (response.status === 'success') {
+            alert('Post Done Successfully');
+        }
+    }
 
     setPostPage = (page) => this.setState({
         postPage: page
@@ -107,6 +144,7 @@ class Home extends React.Component {
     render() {
         let feed; let show = 'Show Feeds'; let radioButtons;
         let newPost; let NewPost;
+        // let createUser;
         radioButtons = <RadioButtons selectedState = {this.state.selectedState} setCheckedState = {this.setCheckedState}/>
         if (this.state.showFeeds) {
             feed = this.state.feeds.map((feed) => {
@@ -120,7 +158,7 @@ class Home extends React.Component {
             );
             newPost = <label onClick = {(e) => this.setPostPage('article')}>Post New Article</label>
         } else if (!this.state.showFeeds && this.state.selectedState === 'gifState') {
-            feed = this.state.articles.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
+            feed = this.state.gifs.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
             );
             newPost = <label onClick = {(e) => this.setPostPage('gif')}>Post New Gif</label>;
         }
