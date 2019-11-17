@@ -44,27 +44,38 @@ class NewPosts extends React.Component {
         })
     }
 
+    MakePost = e => {
+        e.preventDefault();
+        this.props.postPosts(this.state.feed, this.state.title, this.state.inappropflag, this.state.authorid, this.state.tagid, this.state.selectedFile, this.props.artORgif);
+    }
+
     render() {
         let page;
         if (this.props.artORgif === 'article') {
            page = <div>
-                <input type = 'text' value = {this.state.title} onChange = {this.setData} name = 'title'/>
-                <textarea value = {this.state.feed} onChange = {this.setData} name = 'feed'></textarea>
-                <select value = {this.state.tag} onChange = {this.setData} name = 'tag'>
-                    <option value = 'casual'>Casual</option>
-                    <option value = 'work'>Work</option>
-                    <option value = 'family'>Family</option>
-                </select>
+                <form onSubmit = {this.MakePost}>
+                    <input type = 'text' value = {this.state.title} onChange = {this.setData} name = 'title'/>
+                    <textarea value = {this.state.feed} onChange = {this.setData} name = 'feed'></textarea>
+                    <select value = {this.state.tag} onChange = {this.setData} name = 'tag'>
+                        <option value = 'casual'>Casual</option>
+                        <option value = 'work'>Work</option>
+                        <option value = 'family'>Family</option>
+                    </select>
+                    <button>Post Article</button>
+                </form>
             </div>
         } else {
             page = <div>
-                <input type = 'text' value = {this.state.title} onChange = {this.setData} name = 'title'/>
-                <input type = 'file' onChange = {this.setFile} name = 'file'/>
-                <select value = {this.state.tag} onChange = {this.setData} name = 'tag'>
-                    <option value = 'casual'>Casual</option>
-                    <option value = 'work'>Work</option>
-                    <option value = 'family'>Family</option>
-                </select>
+                <form onSubmit = {this.props.postPosts(this.state.feed, this.state.title, this.state.inappropflag, this.state.authorid, this.state.tagid, this.state.selectedFile, this.props.artORgif)}>
+                    <input type = 'text' value = {this.state.title} onChange = {this.setData} name = 'title'/>
+                    <input type = 'file' onChange = {this.setFile} name = 'file'/>
+                    <select value = {this.state.tag} onChange = {this.setData} name = 'tag'>
+                        <option value = 'casual'>Casual</option>
+                        <option value = 'work'>Work</option>
+                        <option value = 'family'>Family</option>
+                    </select>
+                    <button>Post Gif</button>
+                </form>
             </div>
         }
         return (
