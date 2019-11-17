@@ -23,7 +23,6 @@ class SignIn extends React.Component {
         } else if (verb === 'GET') {
             const response = await fetch(api, {
                 method: verb,
-                params: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -48,24 +47,39 @@ class SignIn extends React.Component {
             const jsonResponse = await this.makeRequests('POST', postAPI, data, '', true);
             if (jsonResponse.status === 'success') {
                 const {userId, token, administrator} = jsonResponse.data;
-                const userID = userId; 
-                const getAPI = `http://localhost:8000/api/v1/auth/users/${userID}`;
+                // const userID = userId; 
+                const getAPI = `http://localhost:8000/api/v1/auth/users/${userId}`;
                 
-                const userGetResponse = await this.makeRequests('GET', getAPI, JSON.stringify({userId: userId}, false), token);
-                const user = {
-                    userId,
-                    token,
-                    administrator,
-                    firstname: userGetResponse.data[0].firstname,
-                    lastname: userGetResponse.data[0].lastname,
-                    staffnumber: userGetResponse.data[0].staffnumber
+                const userGetResponse = await this.makeRequests('GET', getAPI, '', token, false);
+                let user;
+                console.log(userGetResponse.data);
+                if (userGetResponse.status === 'success') {
+                    user = {
+                        userId,
+                        token,
+                        administrator,
+                        firstname: userGetResponse.data[0].firstname,
+                        lastname: userGetResponse.data[0].lastname,
+                        staffnumber: userGetResponse.data[0].staffnumber
+                    }
+                } else {
+                    user = {
+                        userId,
+                        token,
+                        administrator,
+                        firstname: '',
+                        lastname: '',
+                        staffnumber: ''
+                    }
+                    alert('problem retrieving user details');
                 }
+                
                 this.props.user(user);
                 this.props.change(3);
             } else if (jsonResponse.status === 'error') {
-                if (jsonResponse.data.message === 'incorrect password')
+                if (jsonResponse.error.message === 'incorrect password')
                     alert('Incorrect Password!');
-                else if (jsonResponse.data.message === 'user doesnt exist')
+                else if (jsonResponse.error.message === 'user doesnt exist')
                     alert('User does not exist');
                 else alert('Server Error!');
             }
@@ -82,7 +96,7 @@ class SignIn extends React.Component {
     render() {
         return(
             <div className="signin">
-                <h1 onClick={(e) => this.props.change(2)}>SignIn</h1>
+                <h1>SignIn</h1>
                 <form onSubmit = {this.dosomething}>
                     <Line 
                         textlabel = 'Email' 
