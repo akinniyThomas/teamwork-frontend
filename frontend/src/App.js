@@ -22,7 +22,7 @@ class App extends React.Component {
     // this.changePage = this.changePage.bind(this);
   }
 
-  userPage = (e) => {console.log('here');this.setPageNumber(2);}
+  userPage = (e) => this.setPageNumber(2);
 
   setPageNumber = (pageNumber) => {
     this.setState({pageNumber: pageNumber});
