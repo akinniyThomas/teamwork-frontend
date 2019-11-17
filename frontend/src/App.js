@@ -3,6 +3,7 @@ import './App.css';
 import SignIn from './Signin';
 import SignUp from './Signup';
 import Home from './Home';
+import OneFeed from './OneFeed';
 
 class App extends React.Component {
   constructor(props){
@@ -49,10 +50,14 @@ class App extends React.Component {
       logOutIn = 'Logout';
       page = <SignUp change = {this.setPageNumber}/>
     }
-    else {
+    else if(this.state.pageNumber === 3) {
       fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
       logOutIn = 'Logout';
       page = <Home change = {this.setPageNumber} user = {this.state.user}/>
+    } else {
+      fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
+      logOutIn = 'Logout';
+      page = <OneFeed change = {this.setPageNumber} user = {this.state.user}/>
     }
   return (
     <div  className="App">
