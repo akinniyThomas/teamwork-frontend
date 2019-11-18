@@ -1,9 +1,43 @@
 import React from 'react';
 
 class Article extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            readOnly: true,
+            newFeed: this.props.feed.feed,
+            newTitle: this.props.feed.title
+        }
+    }
+
+    setReadOnly = e => this.setState({readOnly: !this.state.readOnly});
+
+    setNewFeed = e => this.setState({newFeed: e.target.value});
+
+    setNewTitle = e => this.setState({newTitle: e.target.value});
+
+    editArticle = async (e) => {
+        const token = this.props.user.token;
+        const api = `http://localhost:8000/api/v1/articles/${this.props.feed.id}`;
+        const data = {
+            title: this.state.newTitle,
+            feed: this.state.newFeed,
+            inappropflag: false,
+            // tagid: this.props.feed.tagid
+        }
+        const response = await fetch(api, {
+            method: 'PATCH',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const jsonResponse = await response.json();
+        if (jsonResponse.status === 'success') {
+            alert('Article successfully updated!');
+        }
+    }
 
     render() {
         let delet; let edit; let authorName; 
@@ -14,14 +48,23 @@ class Article extends React.Component {
             edit = 'edit post';
         }
         authorName = `${this.props.feed.authorfirstname} ${this.props.feed.authorlastname}`;
+        let feedVal = this.props.feed.feed; let doneEditing;
+        let titleVal = this.props.feed.title;
+        if (!this.state.readOnly) {
+            feedVal = this.state.newFeed;
+            titleVal = this.state.newTitle;
+            doneEditing = 'Done';
+        }
         return(
             <div >
                 <span>{authorName}</span>
-                <textarea readOnly value = {this.props.feed.feed}></textarea>
+                <input type = 'text' value = {titleVal} readOnly = {this.state.readOnly} onChange = {this.setNewTitle}/>
+                <textarea readOnly = {this.state.readOnly} value = {feedVal} onChange = {this.setNewFeed}></textarea>
+                <span onClick = {this.editArticle}>{doneEditing}</span>
                 <span onClick={(e) => this.props.change(4)}>comments</span>
                 <span>{category}</span>
                 <span>{delet}</span>
-                <span>{edit}</span>
+                <span onClick = {this.setReadOnly}>{edit}</span>
                 <span>{dateAndTime}</span>
             </div>
         );
