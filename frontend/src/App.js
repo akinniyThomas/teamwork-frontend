@@ -17,10 +17,13 @@ class App extends React.Component {
         staffnumber: '',
         token: '',
         administrator: false
-      }
+      },
+      feed: {}
     };
     // this.changePage = this.changePage.bind(this);
   }
+
+  setFeed = (feed) => this.setState({feed: feed});
 
   userPage = (e) => this.setPageNumber(2);
 
@@ -53,11 +56,11 @@ class App extends React.Component {
     else if(this.state.pageNumber === 3) {
       fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
       logOutIn = 'Logout';
-      page = <Home change = {this.setPageNumber} user = {this.state.user}/>
+      page = <Home change = {this.setPageNumber} user = {this.state.user} setOneFeed = {this.setFeed}/>
     } else {
       fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
       logOutIn = 'Logout';
-      page = <OneFeed change = {this.setPageNumber} user = {this.state.user}/>
+      page = <OneFeed change = {this.setPageNumber} user = {this.state.user} feed = {this.state.feed}/>
     }
     if (this.state.user.administrator) createUser = 'Create New User';
   return (

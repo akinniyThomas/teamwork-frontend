@@ -148,17 +148,17 @@ class Home extends React.Component {
         radioButtons = <RadioButtons selectedState = {this.state.selectedState} setCheckedState = {this.setCheckedState} valueOne = 'articleState' valueTwo = 'gifState' radioOne = 'Article' radioTwo = 'Gif' name = 'gif_art'/>
         if (this.state.showFeeds) {
             feed = this.state.feeds.map((feed) => {
-                if (feed.feedtype === 'art') return <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
-                else if (feed.feedtype === 'gif') return <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
+                if (feed.feedtype === 'art') return <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed}/>
+                else if (feed.feedtype === 'gif') return <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed}/>
             });
             show = 'Show My Articles/Gifs';
             radioButtons = '';
         } else if (!this.state.showFeeds && this.state.selectedState === 'articleState') {
-            feed = this.state.articles.map((feed) => <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
+            feed = this.state.articles.map((feed) => <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed}/>
             );
             newPost = <label onClick = {(e) => this.setPostPage('article')}>Post New Article</label>
         } else if (!this.state.showFeeds && this.state.selectedState === 'gifState') {
-            feed = this.state.gifs.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
+            feed = this.state.gifs.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed}/>
             );
             newPost = <label onClick = {(e) => this.setPostPage('gif')}>Post New Gif</label>;
         }

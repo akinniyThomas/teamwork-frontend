@@ -21,6 +21,12 @@ class Gif extends React.Component {
         }
     }
 
+    setOneFeed = (e) => {
+        e.preventDefault();
+        this.props.setOneFeed(this.props.feed);
+        this.props.change(4);
+    }
+
     render() {
         let delet; let authorName;
         const category = 'category here';
@@ -30,13 +36,19 @@ class Gif extends React.Component {
             // edit = 'edit post';
         }
         authorName = `${this.props.feed.authorfirstname} ${this.props.feed.authorlastname}`;
+
+        let subGroup = <div>
+            <span onClick = {this.setOneFeed}>comments</span>
+            <span onClick = {this.deleteGif}>{delet}</span>
+        </div>;
+        if (this.props.oneFeed) subGroup = '';
+
         return(
             <div >
                 <span>{authorName}</span>
                 <img src = {this.props.feed.feed} alt={this.props.feed.title}></img>
-                <span onClick={(e) => this.props.change(4)}>comments</span>
-                <span onClick = {this.deleteGif}>{delet}</span>
                 {/* <span>{edit}</span> */}
+                {subGroup}
                 <span>{category}</span>
                 <span>{dateAndTime}</span>
             </div>
