@@ -63,8 +63,10 @@ class Article extends React.Component {
 
     setOneFeed = (e) => {
         e.preventDefault();
-        this.props.setOneFeed(this.props.feed);
-        this.props.change(4);
+        if (this.state.readOnly) {
+            this.props.setOneFeed(this.props.feed);
+            this.props.change(4);
+        }
     }
 
     render() {
@@ -93,10 +95,10 @@ class Article extends React.Component {
         </div>;
         if (this.props.oneFeed) subGroup = '';
         return(
-            <div >
+            <div>
                 <span>{authorName}</span>
                 <input type = 'text' value = {titleVal} readOnly = {this.state.readOnly} onChange = {this.setNewTitle}/>
-                <textarea readOnly = {this.state.readOnly} value = {feedVal} onChange = {this.setNewFeed}></textarea>
+                <textarea onClick = {this.setOneFeed} readOnly = {this.state.readOnly} value = {feedVal} onChange = {this.setNewFeed}></textarea>
                 {subGroup}
                 <span>{category}</span>
                 <span>{dateAndTime}</span>
