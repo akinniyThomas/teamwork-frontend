@@ -61,6 +61,12 @@ class Article extends React.Component {
         }
     }
 
+    setOneFeed = (e) => {
+        e.preventDefault();
+        this.props.setOneFeed(this.props.feed);
+        this.props.change(4);
+    }
+
     render() {
         let delet; let edit; let authorName; 
         const category = `${this.props.feed.category}`;
@@ -77,16 +83,22 @@ class Article extends React.Component {
             titleVal = this.state.newTitle;
             doneEditing = 'Done';
         }
+
+        let subGroup = <div>
+            <span onClick = {this.editArticle}>{doneEditing}</span>
+            <span onClick={this.setOneFeed}>comments</span>
+            
+            <span onClick = {this.deleteArticle}>{delet}</span>
+            <span onClick = {this.setReadOnly}>{edit}</span>
+        </div>;
+        if (this.props.oneFeed) subGroup = '';
         return(
             <div >
                 <span>{authorName}</span>
                 <input type = 'text' value = {titleVal} readOnly = {this.state.readOnly} onChange = {this.setNewTitle}/>
                 <textarea readOnly = {this.state.readOnly} value = {feedVal} onChange = {this.setNewFeed}></textarea>
-                <span onClick = {this.editArticle}>{doneEditing}</span>
-                <span onClick={(e) => this.props.change(4)}>comments</span>
+                {subGroup}
                 <span>{category}</span>
-                <span onClick = {this.deleteArticle}>{delet}</span>
-                <span onClick = {this.setReadOnly}>{edit}</span>
                 <span>{dateAndTime}</span>
             </div>
         );
