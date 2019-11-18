@@ -39,6 +39,28 @@ class Article extends React.Component {
         }
     }
 
+    deleteArticle = async (e) => {
+        const token = this.props.user.token;
+        const api = `http://localhost:8000/api/v1/articles/${this.props.feed.id}`;
+        // const data = {
+        //     title: this.state.newTitle,
+        //     feed: this.state.newFeed,
+        //     inappropflag: false,
+        //     // tagid: this.props.feed.tagid
+        // }
+        const response = await fetch(api, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const jsonResponse = await response.json();
+        if (jsonResponse.status === 'success') {
+            alert('Article successfully deleted!');
+        }
+    }
+
     render() {
         let delet; let edit; let authorName; 
         const category = `${this.props.feed.category}`;
@@ -63,7 +85,7 @@ class Article extends React.Component {
                 <span onClick = {this.editArticle}>{doneEditing}</span>
                 <span onClick={(e) => this.props.change(4)}>comments</span>
                 <span>{category}</span>
-                <span>{delet}</span>
+                <span onClick = {this.deleteArticle}>{delet}</span>
                 <span onClick = {this.setReadOnly}>{edit}</span>
                 <span>{dateAndTime}</span>
             </div>
