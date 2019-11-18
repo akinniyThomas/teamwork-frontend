@@ -47,7 +47,6 @@ class Gif extends React.Component {
             <div >
                 <span>{authorName}</span>
                 <img src = {this.props.feed.feed} alt={this.props.feed.title}></img>
-                {/* <span>{edit}</span> */}
                 {subGroup}
                 <span>{category}</span>
                 <span>{dateAndTime}</span>
