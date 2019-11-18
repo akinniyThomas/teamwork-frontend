@@ -22,7 +22,7 @@ class App extends React.Component {
     // this.changePage = this.changePage.bind(this);
   }
 
-  userPage = (e) => {console.log('here');this.setPageNumber(2);}
+  userPage = (e) => this.setPageNumber(2);
 
   setPageNumber = (pageNumber) => {
     this.setState({pageNumber: pageNumber});
@@ -48,7 +48,7 @@ class App extends React.Component {
     else if(this.state.pageNumber === 2) {
       fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
       logOutIn = 'Logout';
-      page = <SignUp change = {this.setPageNumber}/>
+      page = <SignUp change = {this.setPageNumber} user = {this.state.user}/>
     }
     else if(this.state.pageNumber === 3) {
       fullName = `${this.state.user.firstname} ${this.state.user.lastname} [${this.state.user.staffnumber}]`;
