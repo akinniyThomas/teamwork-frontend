@@ -19,6 +19,7 @@ class Line extends React.Component {
                 <input 
                     type= {this.props.type} 
                     value = {this.props.value}
+                    checked = {this.props.value}
                     name = {this.props.name}
                     onChange = {this.changeMatters}/>
             </div>

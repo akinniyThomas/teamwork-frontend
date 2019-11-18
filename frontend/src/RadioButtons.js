@@ -5,12 +5,12 @@ class RadioButtons extends React.Component {
         return (
             <div>
                 <label>
-                    <input type = 'radio' checked = {this.props.selectedState === 'articleState'} value = 'articleState' onChange = {this.props.setCheckedState} name = 'gif_art'/>
-                    Article
+                    <input type = 'radio' checked = {this.props.selectedState === this.props.valueOne} value = {this.props.valueOne} onChange = {this.props.setCheckedState} name = {this.props.name}/>
+                    {this.props.radioOne}
                 </label>
                 <label>
-                    <input type = 'radio' checked = {this.props.selectedState === 'gifState'} value = 'gifState' onChange = {this.props.setCheckedState} name = 'gif_art'/>
-                    Gif
+                    <input type = 'radio' checked = {this.props.selectedState === this.props.valueTwo} value = {this.props.valueTwo} onChange = {this.props.setCheckedState} name = {this.props.name}/>
+                    {this.props.radioTwo}
                 </label>
         </div>
         );

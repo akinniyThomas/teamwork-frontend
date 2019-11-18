@@ -145,7 +145,7 @@ class Home extends React.Component {
         let feed; let show = 'Show Feeds'; let radioButtons;
         let newPost; let NewPost;
         // let createUser;
-        radioButtons = <RadioButtons selectedState = {this.state.selectedState} setCheckedState = {this.setCheckedState}/>
+        radioButtons = <RadioButtons selectedState = {this.state.selectedState} setCheckedState = {this.setCheckedState} valueOne = 'articleState' valueTwo = 'gifState' radioOne = 'Article' radioTwo = 'Gif' name = 'gif_art'/>
         if (this.state.showFeeds) {
             feed = this.state.feeds.map((feed) => {
                 if (feed.feedtype === 'art') return <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change}/>
