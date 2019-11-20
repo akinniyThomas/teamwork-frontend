@@ -36,6 +36,8 @@ class Article extends React.Component {
         const jsonResponse = await response.json();
         if (jsonResponse.status === 'success') {
             alert('Article successfully updated!');
+            this.setReadOnly();
+            this.props.refresher();
         }
     }
 
@@ -58,12 +60,13 @@ class Article extends React.Component {
         const jsonResponse = await response.json();
         if (jsonResponse.status === 'success') {
             alert('Article successfully deleted!');
+            this.props.refresher();
         }
     }
 
     setOneFeed = (e) => {
         e.preventDefault();
-        if (this.state.readOnly) {
+        if (this.state.readOnly && this.props.isNotOneFeed) {
             this.props.setOneFeed(this.props.feed);
             this.props.change(4);
         }
