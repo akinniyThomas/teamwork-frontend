@@ -15,8 +15,7 @@ class Home extends React.Component {
             selectedState: 'articleState',
             postPage: null
         }
-        this.getFeeds();
-        this.getMyArticlesAndGifs();
+        this.refresher();
     }
 
     setFeed = (feed) =>
@@ -84,6 +83,8 @@ class Home extends React.Component {
             const feed = feedsGotten.data;
             this.setFeed(feed);
             console.log(feed);
+        } else if (feedsGotten.error.message === 'no rows') {
+            this.setFeed([]);
         }
     }
 
@@ -95,6 +96,8 @@ class Home extends React.Component {
             const articles = articlesGotten.data;
             this.setArticle(articles);
             console.log(articles);
+        } else if (articlesGotten.error.message === 'no rows') {
+            this.setArticle([]);
         }
         api = 'http://localhost:8000/api/v1/gifs';
         const gifsGotten = await this.makeRequests('GET', api, '', token, false);
@@ -102,6 +105,8 @@ class Home extends React.Component {
             const gifs = gifsGotten.data;
             this.setGifs(gifs);
             console.log(gifs);
+        } else if (gifsGotten.error.message === 'no rows') {
+            this.setGifs([]);
         }
     }
 
@@ -134,31 +139,49 @@ class Home extends React.Component {
         else response = await this.makeRequests('POST', api, data, token, false);
         if (response.status === 'success') {
             alert('Post Done Successfully');
+            this.setState({
+                postPage: null
+            });
+            this.refresher();
+        } else {
+            alert('Issue encountered with Post..');
         }
     }
 
-    setPostPage = (page) => this.setState({
-        postPage: page
-    });
+    setPostPage = (page) => {
+        if (this.state.postPage !== page) {
+            this.setState({
+            postPage: page
+        });} else {
+            this.setState({
+                postPage: null
+            });
+        }
+    }
+
+    refresher = () => {
+        this.getFeeds();
+        this.getMyArticlesAndGifs();
+    }
 
     render() {
         let feed; let show = 'Show Feeds'; let radioButtons;
         let newPost; let NewPost;
         // let createUser;
         radioButtons = <RadioButtons selectedState = {this.state.selectedState} setCheckedState = {this.setCheckedState} valueOne = 'articleState' valueTwo = 'gifState' radioOne = 'Article' radioTwo = 'Gif' name = 'gif_art'/>
-        if (this.state.showFeeds) {
+        if (this.state.showFeeds && this.state.feeds !== []) {
             feed = this.state.feeds.map((feed) => {
-                if (feed.feedtype === 'art') return <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed}/>
-                else if (feed.feedtype === 'gif') return <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed}/>
+                if (feed.feedtype === 'art') return <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed} refresher = {this.refresher} isNotOneFeed = {true}/>
+                else if (feed.feedtype === 'gif') return <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed} refresher = {this.refresher} isNotOneFeed = {true}/>
             });
             show = 'Show My Articles/Gifs';
             radioButtons = '';
-        } else if (!this.state.showFeeds && this.state.selectedState === 'articleState') {
-            feed = this.state.articles.map((feed) => <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed}/>
+        } else if (!this.state.showFeeds && this.state.selectedState === 'articleState' && this.state.articles !== []) {
+            feed = this.state.articles.map((feed) => <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed} refresher = {this.refresher} isNotOneFeed = {true}/>
             );
             newPost = <label onClick = {(e) => this.setPostPage('article')}>Post New Article</label>
-        } else if (!this.state.showFeeds && this.state.selectedState === 'gifState') {
-            feed = this.state.gifs.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed}/>
+        } else if (!this.state.showFeeds && this.state.selectedState === 'gifState' && this.state.gifs !== []) {
+            feed = this.state.gifs.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed} refresher = {this.refresher} isNotOneFeed = {true}/>
             );
             newPost = <label onClick = {(e) => this.setPostPage('gif')}>Post New Gif</label>;
         }

@@ -24,6 +24,28 @@ class SignUp extends React.Component {
         }
     }
 
+    resetAll = () => {
+        const allStates = [
+            'firstname',
+            'lastname',
+            'email',
+            'staffnumber',
+            'address',
+            'jobrole',
+            'password',
+            'passwordConfirm',
+            // administrator: false,
+            'employmentdate'
+            // gender: 'male'
+        ]
+
+        allStates.forEach(element => {
+            this.setState({[element]: ''});
+        });
+        this.setState({gender: 'male'});
+        this.setState({administrator: false});
+    }
+
     setEmploymentDate = (date) => this.setState({employmentdate: date});
 
     setCheckedState = e => this.setState({
@@ -52,7 +74,10 @@ class SignUp extends React.Component {
             const jsonResponse = await response.json();
             if (jsonResponse.status === 'success') {
                 alert('user successfully created');
+                this.resetAll();
             }
+        } else {
+            alert('password mismatch');
         }
     }
 
@@ -62,6 +87,9 @@ class SignUp extends React.Component {
                 <h1
                 //  onClick={(e) => this.props.change(3)}
                 >Create User</h1>
+                <div>
+                    <p onClick = {e => this.props.change(3)}>Back to Home</p>
+                </div>
                 <form onSubmit = {this.SignUp}>
                     <Line
                         textlabel = 'FirstName'

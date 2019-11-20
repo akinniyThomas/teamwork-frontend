@@ -18,13 +18,16 @@ class Gif extends React.Component {
         const jsonResponse = await response.json();
         if (jsonResponse.status === 'success') {
             alert('Gif successfully deleted!');
+            this.props.refresher();
         }
     }
 
     setOneFeed = (e) => {
-        e.preventDefault();
-        this.props.setOneFeed(this.props.feed);
-        this.props.change(4);
+        if (this.props.isNotOneFeed) {
+            e.preventDefault();
+            this.props.setOneFeed(this.props.feed);
+            this.props.change(4);
+        }
     }
 
     render() {
