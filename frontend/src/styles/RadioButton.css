@@ -22,20 +22,17 @@
     min-width: 200px;
 }
 
-.textBoxLine {
-    background-color: #47ACAC;
-    margin-left: 5px;
+.labelHome {
+    color: #12E3E3;
+    /* background-color: #47ACAC; */
+    /* margin-left: 5px;
     min-width: 100px;
     /* color: green; */
-    max-height: 18px;
+    /* max-height: 18px; */
 }
 
-/* .leftSide {
-    background-color: red;
-    min-width: 100px;
-    display: inline;
-}
 
-.rightSide {
-    display: inline;
-} */
+.radioHome {
+    color: #12E3E3;
+    background-color: #12E3E3;
+}

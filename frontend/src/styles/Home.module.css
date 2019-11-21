@@ -1,0 +1,27 @@
+.container {
+    background-color: rgb(5, 102, 102);
+    margin: 0em;
+    border: rgb(5, 102, 102) solid 0.1px;
+    padding: 0em;
+}
+
+.header {
+    color:  #12E3E3;
+}
+
+.showFeeds, .newPost {
+    color: #12E3E3;
+    cursor: pointer;
+}
+
+hr {
+  border-color: rgb(45, 87, 87);
+}
+
+.artGif {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    /* border: yellow solid 5px; */
+}
