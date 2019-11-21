@@ -3,6 +3,7 @@ import Article from './Article';
 import Gif from './Gif';
 import RadioButtons from './RadioButtons';
 import NewPosts from './NewPosts';
+import styles from './styles/Home.module.css';
 
 class Home extends React.Component {
     constructor(props) {
@@ -168,7 +169,7 @@ class Home extends React.Component {
         let feed; let show = 'Show Feeds'; let radioButtons;
         let newPost; let NewPost;
         // let createUser;
-        radioButtons = <RadioButtons selectedState = {this.state.selectedState} setCheckedState = {this.setCheckedState} valueOne = 'articleState' valueTwo = 'gifState' radioOne = 'Article' radioTwo = 'Gif' name = 'gif_art'/>
+        radioButtons = <RadioButtons selectedState = {this.state.selectedState} setCheckedState = {this.setCheckedState} valueOne = 'articleState' valueTwo = 'gifState' radioOne = 'Article' radioTwo = 'Gif' name = 'gif_art' home = {true}/>
         if (this.state.showFeeds && this.state.feeds !== []) {
             feed = this.state.feeds.map((feed) => {
                 if (feed.feedtype === 'art') return <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed} refresher = {this.refresher} isNotOneFeed = {true}/>
@@ -179,28 +180,31 @@ class Home extends React.Component {
         } else if (!this.state.showFeeds && this.state.selectedState === 'articleState' && this.state.articles !== []) {
             feed = this.state.articles.map((feed) => <Article feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed} refresher = {this.refresher} isNotOneFeed = {true}/>
             );
-            newPost = <label onClick = {(e) => this.setPostPage('article')}>Post New Article</label>
+            newPost = <label className = {styles.newPost} onClick = {(e) => this.setPostPage('article')}>Post New Article</label>
         } else if (!this.state.showFeeds && this.state.selectedState === 'gifState' && this.state.gifs !== []) {
             feed = this.state.gifs.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed} refresher = {this.refresher} isNotOneFeed = {true}/>
             );
-            newPost = <label onClick = {(e) => this.setPostPage('gif')}>Post New Gif</label>;
+            newPost = <label className = {styles.new} onClick = {(e) => this.setPostPage('gif')}>Post New Gif</label>;
         }
         if (newPost && this.state.postPage) NewPost = this.newPoster(this.state.postPage);
 
         return(
-            <div className="home">
-                <h1>Home</h1>
+            <div className = {styles.container}>
+                <h1 className = {styles.header}>Home</h1>
                 {/* {/* <div>{this.props.user.userId}</div>
                 <p>My Name is {this.props.user.userFirstName}  {this.props.user.userLastName} with Number {this.props.user.userStaffNumber}</p> */}
                 <div>
-                    <label onClick = {this.setShowFeeds}>{show}</label>
+                    <label className = {styles.showFeeds} onClick = {this.setShowFeeds}>{show}</label>
                 </div> 
                 <div>
                     {radioButtons}
                 </div>
                 {newPost}
+                <hr></hr>
                 {NewPost}
-                {feed}
+                <div className = {styles.artGif}>
+                    {feed}
+                </div>
                 {/* <Gif/>
                 <Article/> */}
             </div>
