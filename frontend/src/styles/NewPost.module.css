@@ -1,0 +1,61 @@
+.container {
+    margin-bottom: 20px;
+    background-color: #337c7c;
+    border-radius: 5px;
+    border: #074141 inset 1px;
+    /* max-width: 500px; */
+    min-width: 250px;
+    width: auto;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    /* grid-template-areas: 
+    'aa aa aa aa aa'
+    'tt tt tt tt tt'
+    'ff ff ff ff ff'
+    'ff ff ff ff ff'
+    'ff ff ff ff ff'
+    'bb bb bb bb bb'; */
+    /* gap: 5px; */
+    /* grid-template-columns: repeat(auto, minmax()); */
+}
+
+.formContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    /* height: 300px; */
+    align-items: center;
+}
+
+.feed {
+    min-height: 150px;
+    flex-grow: 2;
+    margin: 5px 20px;
+    background-color: #66e7e7;
+    color: black;
+}
+
+.title {
+    background-color: #66e7e7;
+    color: black;
+    grid-area: tt;
+    margin: 2px 15px;
+    border-radius: 5px;
+}
+
+/* textarea.feed {
+    min-height: 150px;
+    margin: 4px 5px;
+    border-radius: 8px;
+    overflow: hidden;
+    /* grid-column: 1;
+    grid-row: 3; */
+    /* grid-area: ff;
+    scrollbar-face-color: #074141;
+    scrollbar-color: #074141;
+    scrollbar-darkshadow-color: #074141;
+    scrollbar-highlight-color: #074141;
+    scrollbar-track-color: #074141;
+    -ms-scrollbar-track-color: #074141;
+} */ 
