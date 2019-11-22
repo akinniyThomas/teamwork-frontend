@@ -27,12 +27,17 @@
     background-color: #66e7e7;
     color: black;
     grid-area: tt;
+    margin: 2px 15px;
+    border-radius: 5px;
 }
 
 textarea.feed {
     background-color: #66e7e7;
     color: black;
     min-height: 150px;
+    margin: 4px 5px;
+    border-radius: 8px;
+    overflow: hidden;
     /* grid-column: 1;
     grid-row: 3; */
     grid-area: ff;
