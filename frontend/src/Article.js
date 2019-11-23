@@ -1,13 +1,28 @@
 import React from 'react';
+import styles from './styles/Article.module.css';
 
 class Article extends React.Component {
     constructor(props) {
         super(props);
+        
+        const dateCreated = this.props.feed.createdon;
+        const dateAndTime = dateCreated.split('T');
+        const date = dateAndTime[0];
+        const time = dateAndTime[1].substring(0, 5);
+        const dateTime = `${date} @ ${time}`;
+
         this.state = {
             readOnly: true,
             newFeed: this.props.feed.feed,
-            newTitle: this.props.feed.title
+            newTitle: this.props.feed.title,
+            dateTime: dateTime
         }
+        // this.setDateTime();
+    }
+
+    setDateTime = () => {
+        // this.setState({dateTime: dateTime});
+        // console.log(dateTime);
     }
 
     setReadOnly = e => this.setState({readOnly: !this.state.readOnly});
@@ -75,36 +90,52 @@ class Article extends React.Component {
     render() {
         let delet; let edit; let authorName; 
         const category = `${this.props.feed.category}`;
-        const dateAndTime = `${this.props.feed.createdon}`;
+        const dateAndTime = this.state.dateTime;
+        console.log(this.state.dateTime);
         if (this.props.user.userId === this.props.feed.authorid){
             delet = 'delete';
             edit = 'edit post';
+            if (this.state.readOnly === false) edit = 'cancel';
         }
         authorName = `${this.props.feed.authorfirstname} ${this.props.feed.authorlastname}`;
         let feedVal = this.props.feed.feed; let doneEditing;
         let titleVal = this.props.feed.title;
+
+        let subGroup = <div className = {styles.changable}>
+            {/* <span className = {styles.done} onClick = {this.editArticle}>{doneEditing}</span> */}
+            <span className = {styles.comment} onClick={this.setOneFeed}>comments</span>
+            
+            <span className = {styles.delete} onClick = {this.deleteArticle}>{delet}</span>
+            <span className = {styles.edit} onClick = {this.setReadOnly}>{edit}</span>
+        </div>;
+        
         if (!this.state.readOnly) {
             feedVal = this.state.newFeed;
             titleVal = this.state.newTitle;
-            doneEditing = 'Done';
+            doneEditing = 'done';
+
+            subGroup = <div className = {styles.changable}>
+                <span className = {styles.comment} onClick={this.setOneFeed}>comments</span>
+                <span className = {styles.delete} onClick = {this.deleteArticle}>{delet}</span>
+                <span className = {styles.edit} onClick = {this.setReadOnly}>{edit}</span>
+                <span className = {styles.done} onClick = {this.editArticle}>{doneEditing}</span>
+            </div>;
         }
 
-        let subGroup = <div>
-            <span onClick = {this.editArticle}>{doneEditing}</span>
-            <span onClick={this.setOneFeed}>comments</span>
-            
-            <span onClick = {this.deleteArticle}>{delet}</span>
-            <span onClick = {this.setReadOnly}>{edit}</span>
-        </div>;
         if (this.props.oneFeed) subGroup = '';
         return(
-            <div>
-                <span>{authorName}</span>
-                <input type = 'text' value = {titleVal} readOnly = {this.state.readOnly} onChange = {this.setNewTitle}/>
-                <textarea onClick = {this.setOneFeed} readOnly = {this.state.readOnly} value = {feedVal} onChange = {this.setNewFeed}></textarea>
-                {subGroup}
-                <span>{category}</span>
-                <span>{dateAndTime}</span>
+            <div className = {styles.container}>
+                <div className = {styles.author}>{authorName}</div>
+                <input className = {styles.title} type = 'text' value = {titleVal} readOnly = {this.state.readOnly} onChange = {this.setNewTitle}/>
+                <textarea className = {styles.feed} onClick = {this.setOneFeed} readOnly = {this.state.readOnly} value = {feedVal} onChange = {this.setNewFeed}></textarea>
+                <div className = {styles.bottom}>
+                    {subGroup}
+                    <div className = {styles.nonChangable}>
+                        <span className = {styles.category}>{category}</span>
+                        <span className = {styles.date}>{dateAndTime}</span>
+                    </div>
+                    {/* <hr></hr> */}
+                </div>
             </div>
         );
     }

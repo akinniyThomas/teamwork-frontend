@@ -1,0 +1,38 @@
+
+.labelLine {
+    color: black;
+    background-color: #12E3E3;
+    /* border: green inset 2px; */
+    margin-right: 5px;
+    width: 70px;
+    text-align: right;
+}
+
+.containerLine {
+    background-color: #12E3E3;
+    color: #2e3a3a;
+    /* border: black solid 0.5px; */
+    padding: 1px 30px;
+    margin: 10px auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    border-radius: 10px;
+    width: 33%;
+    min-width: 200px;
+}
+
+.labelHome {
+    color: #12E3E3;
+    /* background-color: #47ACAC; */
+    /* margin-left: 5px;
+    min-width: 100px;
+    /* color: green; */
+    /* max-height: 18px; */
+}
+
+
+.radioHome {
+    color: #12E3E3;
+    background-color: #12E3E3;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Comment from './Comment';
 import Article from './Article';
 import Gif from './Gif';
+import styles from './styles/OneFeed.module.css';
 
 class OneFeed extends React.Component {
     constructor(props) {
@@ -60,6 +61,8 @@ class OneFeed extends React.Component {
         const jsonResponse = await response.json();
         if (jsonResponse.status === 'success') {
             alert('comment successfully posted');
+            this.setState({commentText: ''});
+            this.makeRequest();
         }
     }
 
@@ -80,9 +83,9 @@ class OneFeed extends React.Component {
             <div >
                 <h3>{feed}</h3>
 
-                <div>
-                    <form onSubmit = {this.postComment}>
-                        <input type = 'text' value = {this.state.commentText} onChange = {this.setCommentText} placeholder = 'Your Thoughts...'/>
+                <div className = {styles.container}>
+                    <form className = {styles.formContainer} onSubmit = {this.postComment}>
+                        <input className = {styles.comment} type = 'text' value = {this.state.commentText} onChange = {this.setCommentText} placeholder = 'Your Thoughts...'/>
                         <button>Post Comment</button>
                     </form>
                 </div>

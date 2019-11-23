@@ -1,0 +1,21 @@
+.container {
+    background-color: rgb(5, 102, 102);
+    margin: 0em;
+    border: rgb(5, 102, 102) solid 0.1px;
+    padding: 0em;
+}
+
+.header {
+    color:  #12E3E3;
+}
+
+button {
+    margin: 40px;
+    color:  white;
+    background:  rgb(77, 133, 133);
+}
+
+button:hover {
+    color: teal;
+    background-color: #12E3E3;
+}

@@ -65,11 +65,13 @@ class App extends React.Component {
     if (this.state.user.administrator) createUser = 'Create New User';
   return (
     <div  className="App">
-      <div>
-        <span>TeamWork</span>
-        <span onClick = {this.userPage}>{createUser}</span>
-        <span>{logOutIn}</span>
-        <span>{fullName}</span>
+      <div className = 'Header'>
+        <span className = 'Teamwork'>TeamWork</span>
+        <div className = 'RightSection'>
+          <span className = 'CreateUser' onClick = {this.userPage}>{createUser}</span>
+          <span className = 'FullName'>{fullName}</span>
+          <span className = 'LogInOut'>{logOutIn}</span>
+        </div>
       </div>
       {page}
     </div>

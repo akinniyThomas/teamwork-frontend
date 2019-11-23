@@ -1,0 +1,12 @@
+.formContainer {
+    display:  flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.comment {
+    background-color: #12E3E3;
+    width: 50%;
+    justify-content: center;
+}

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: teal;
 }
 
 .App-logo {
@@ -19,4 +20,59 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.Header {
+  background-color: rgb(45, 87, 87);
+  margin: 0em;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  color:  #12E3E3;
+  min-height: 50px;
+}
+
+/* .Header:hover {
+} */
+
+.Teamwork {
+  padding-left: 0em;
+  text-align: left;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+.CreateUser:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.CreateUser {
+  min-width: 200px;
+  text-align: right;
+}
+
+.FullName {
+  min-width: 200px;
+  text-align: right;
+}
+
+.LogInOut:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.LogInOut {
+  padding-right: 0em;
+  text-align: right;
+  min-width: 200px;
+  margin-right: 0em;
+}
+
+.RightSection {
+  direction: rtl;
+  display: flex;
+  flex-flow: row wrap;
+  /* grid-template-columns: 2fr 2fr 1fr; */
+  padding-right: 0em;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Line from './oneline';
+import styles from './styles/Signin.module.css';
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -95,21 +96,23 @@ class SignIn extends React.Component {
 
     render() {
         return(
-            <div className="signin">
-                <h1>SignIn</h1>
+            <div className = {styles.container}>
+                <h1 className = {styles.header}>Sign In</h1>
                 <form onSubmit = {this.dosomething}>
                     <Line 
                         textlabel = 'Email' 
                         type = 'email' 
                         value = {this.state.email}
                         name = 'email'
-                        data = {this.setData}/>
+                        data = {this.setData}
+                        signIn = {true}/>
                     <Line 
                         textlabel = 'Password' 
                         type = 'password' 
                         value= {this.state.password}
                         name = 'password'
-                        data = {this.setData}/>
+                        data = {this.setData}
+                        signIn = {true}/>
                     <button>Log In</button>
                 </form>
             </div>
