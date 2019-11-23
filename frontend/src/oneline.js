@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/OneLine.css';
+import styles from './styles/OneLine.module.css';
 
 class Line extends React.Component {
     constructor(props) {
@@ -20,12 +21,14 @@ class Line extends React.Component {
 
     render() {
         return(
-            <div className = {`${this.props.signIn === true ? 'containerLine' : 'containerLineUser'}`}>
+            <div 
+            // className = {`${this.props.signIn === true ? 'containerLine' : 'containerLineUser'}`}>
+            className = {this.props.signIn === true ? styles.containerLine : styles.containerLineUser}>
                 {/* <div className = {styles.leftSide}> */}
-                    <label className = {`${this.props.signIn === true ? 'labelLine' : 'labelLineUser'}`}>{this.props.textlabel}</label>
+                    <label className = {this.props.signIn === true ? styles.labelLine : styles.labelLineUser}>{this.props.textlabel}</label>
                 {/* </div> */}
                 {/* <div className = {styles.rightSide}> */}
-                    <input className = {`${this.props.signIn === true ? 'textBoxLine' : 'textBoxLineUser'}`}
+                    <input className = {this.props.signIn === true ? styles.textBoxLine : styles.textBoxLineUser}
                     type= {this.props.type} 
                     value = {this.props.value}
                     checked = {this.props.value}

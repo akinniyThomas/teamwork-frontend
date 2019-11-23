@@ -3,6 +3,7 @@ import Line from './oneline';
 import RadioButtons from './RadioButtons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import styles from './styles/Signup.module.css';
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -83,14 +84,14 @@ class SignUp extends React.Component {
 
     render() {
         return(
-            <div className="signup">
-                <h1
+            <div className = {styles.container}>
+                <h1 className = {styles.header}
                 //  onClick={(e) => this.props.change(3)}
                 >Create User</h1>
-                <div>
-                    <p onClick = {e => this.props.change(3)}>Back to Home</p>
+                <div className = {styles.backHome}>
+                    <p onClick = {e => this.props.change(3)}>&larr; Back to Home</p>
                 </div>
-                <form onSubmit = {this.SignUp}>
+                <form className = {styles.formContainer} onSubmit = {this.SignUp}>
                     <Line
                         textlabel = 'FirstName'
                         type = 'text'
@@ -116,7 +117,8 @@ class SignUp extends React.Component {
                         name = 'staffnumber'
                         data = {this.setData}/>
                     {/* gender here */}
-                    <label>Gender
+                    <div className = {styles.gender}>
+                        <label >Gender</label>
                         <RadioButtons 
                             selectedState = {this.state.gender}
                             setCheckedState = {this.setCheckedState}
@@ -125,7 +127,7 @@ class SignUp extends React.Component {
                             radioOne = 'Male'
                             radioTwo = 'Female'
                             name = 'gender'/>
-                    </label>
+                    </div>
                     <Line
                         textlabel = 'Job Role'
                         type = 'text'
@@ -139,11 +141,12 @@ class SignUp extends React.Component {
                         name = 'address'
                         data = {this.setData}/>
                     {/* date here */}
-                    <label>Employment Date
-                        <DatePicker
+                    <div className = {styles.employmentDate}>
+                        <label>Employment Date</label>
+                        <DatePicker className = {styles.employmentDateBox}
                             selected = {this.state.employmentdate}
                             onChange = {this.setEmploymentDate}/>
-                    </label>
+                    </div>
                     <Line textlabel = 'Administrator?'
                         type = 'checkbox'
                         value = {this.state.administrator}
@@ -161,8 +164,9 @@ class SignUp extends React.Component {
                         value = {this.state.passwordConfirm}
                         name = 'passwordConfirm'
                         data = {this.setData}/>
-
-                    <button>Create User</button>
+                    <div className = {styles.butonDiv}>
+                        <button className = {styles.buton}>Create User</button>
+                    </div>
                 </form>
             </div>
         );
