@@ -184,7 +184,7 @@ class Home extends React.Component {
         } else if (!this.state.showFeeds && this.state.selectedState === 'gifState' && this.state.gifs !== []) {
             feed = this.state.gifs.map((feed) => <Gif feed = {feed} key = {feed.id} user = {this.props.user} change = {this.props.change} setOneFeed = {this.props.setOneFeed} refresher = {this.refresher} isNotOneFeed = {true}/>
             );
-            newPost = <label className = {styles.new} onClick = {(e) => this.setPostPage('gif')}>Post New Gif</label>;
+            newPost = <label className = {styles.newPost} onClick = {(e) => this.setPostPage('gif')}>Post New Gif</label>;
         }
         if (newPost && this.state.postPage) NewPost = this.newPoster(this.state.postPage);
 

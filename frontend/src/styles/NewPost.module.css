@@ -31,10 +31,18 @@
 .feed {
     min-height: 150px;
     flex-grow: 2;
+    border-radius: 5px;
     margin: 5px 20px;
     background-color: #66e7e7;
-    color: black;
+    /* color: black; */
 }
+
+/* .feedGif {
+    min-height: 150px;
+    flex-grow: 2;
+    border-radius: 5px;
+    margin: 5px 20px;
+} */
 
 .title {
     background-color: #66e7e7;
@@ -42,6 +50,16 @@
     grid-area: tt;
     margin: 2px 15px;
     border-radius: 5px;
+}
+
+.category {
+    background-color: #66e7e7;
+    /* margin-right: 10px; */
+}
+
+.file {
+    background-color: #66e7e7;
+    /* max-width: 100px; */
 }
 
 /* textarea.feed {

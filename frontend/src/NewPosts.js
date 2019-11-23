@@ -67,15 +67,15 @@ class NewPosts extends React.Component {
             </div>
         } else {
             page = <div>
-                <form onSubmit = {this.MakePost}>
-                    <input type = 'text' value = {this.state.title} onChange = {this.setData} name = 'title'/>
-                    <input type = 'file' onChange = {this.setFile} name = 'file'/>
-                    <select value = {this.state.tag} onChange = {this.setData} name = 'tag'>
+                <form className = {styles.formContainer} onSubmit = {this.MakePost}>
+                    <input className = {styles.title} type = 'text' value = {this.state.title} onChange = {this.setData} name = 'title' placeholder = 'Enter Title Here'/>
+                    <input className = {styles.file} type = 'file' onChange = {this.setFile} name = 'file'/>
+                    <select className = {styles.category} value = {this.state.tag} onChange = {this.setData} name = 'tag'>
                         <option value = 'casual'>Casual</option>
                         <option value = 'work'>Work</option>
                         <option value = 'family'>Family</option>
                     </select>
-                    <button>Post Gif</button>
+                    <button className = {styles.button}>Post Gif</button>
                 </form>
             </div>
         }
