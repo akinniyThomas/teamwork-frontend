@@ -10,3 +10,12 @@
     width: 50%;
     justify-content: center;
 }
+
+.backHome {
+    color: #12E3E3;
+}
+
+.backHome:hover {
+    cursor: pointer;
+    color: white;
+}

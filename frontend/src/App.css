@@ -35,7 +35,7 @@
 /* .Header:hover {
 } */
 
-.Teamwork {
+.Teamwork, .notLogedIn {
   padding-left: 0em;
   text-align: left;
   font-weight: bolder;

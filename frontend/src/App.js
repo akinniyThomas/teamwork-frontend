@@ -60,7 +60,6 @@ class App extends React.Component {
 
   teamworkClick = e => {
     if (this.state.user.userId !== 0) this.setPageNumber(3);
-    else alert('You need to login first');
   }
 
   render() {
@@ -84,7 +83,7 @@ class App extends React.Component {
   return (
     <div  className="App">
       <div className = 'Header'>
-        <span className = 'Teamwork' onClick = {this.teamworkClick}>TeamWork</span>
+        <span className = {`${this.state.user.userId !== 0 ?'Teamwork' : 'notLogedIn'}`} onClick = {this.teamworkClick}>TeamWork</span>
         <div className = 'RightSection'>
           <span className = 'CreateUser' onClick = {this.userPage}>{createUser}</span>
           <span className = 'FullName'>{fullName}</span>

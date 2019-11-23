@@ -81,6 +81,9 @@ class OneFeed extends React.Component {
         );
         return(
             <div >
+                <div className = {styles.backHome}>
+                    <h4 onClick = {e => this.props.change(3)}>&larr;Go Back</h4>
+                </div>
                 <h3>{feed}</h3>
 
                 <div className = {styles.container}>
