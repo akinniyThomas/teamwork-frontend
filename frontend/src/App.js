@@ -45,6 +45,19 @@ class App extends React.Component {
     });
   }
 
+  Logout = e => {
+    const user = {
+      userId: 0,
+      firstname: '',
+      lastname: '',
+      staffnumber: '',
+      token: '',
+      administrator: false
+    };
+    this.setUser(user);
+    this.setPageNumber(1);
+  }
+
   render() {
     let page; let fullName; let logOutIn; let createUser;
     if(this.state.pageNumber === 1) page = <SignIn  change = {this.setPageNumber} user = {this.setUser}/>
@@ -70,7 +83,7 @@ class App extends React.Component {
         <div className = 'RightSection'>
           <span className = 'CreateUser' onClick = {this.userPage}>{createUser}</span>
           <span className = 'FullName'>{fullName}</span>
-          <span className = 'LogInOut'>{logOutIn}</span>
+          <span className = 'LogInOut' onClick = {this.Logout}>{logOutIn}</span>
         </div>
       </div>
       {page}
