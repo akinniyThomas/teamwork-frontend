@@ -63,7 +63,7 @@ class SignUp extends React.Component {
         if (this.state.password === this.state.passwordConfirm) {
             const data = this.state;
             const token = this.props.user.token;
-            const api = 'http://localhost:8000/api/v1/auth/create-user';
+            const api = `${this.state.url}/auth/create-user`;
             const response = await fetch(api, {
                 method: 'POST',
                 body: JSON.stringify(data),

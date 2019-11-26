@@ -15,7 +15,8 @@ class Article extends React.Component {
             readOnly: true,
             newFeed: this.props.feed.feed,
             newTitle: this.props.feed.title,
-            dateTime: dateTime
+            dateTime: dateTime,
+            url: 'https://andteawok.herokuapp.com/api/v1'
         }
         // this.setDateTime();
     }
@@ -33,7 +34,7 @@ class Article extends React.Component {
 
     editArticle = async (e) => {
         const token = this.props.user.token;
-        const api = `http://localhost:8000/api/v1/articles/${this.props.feed.id}`;
+        const api = `${this.state.url}/articles/${this.props.feed.id}`;
         const data = {
             title: this.state.newTitle,
             feed: this.state.newFeed,
@@ -58,7 +59,7 @@ class Article extends React.Component {
 
     deleteArticle = async (e) => {
         const token = this.props.user.token;
-        const api = `http://localhost:8000/api/v1/articles/${this.props.feed.id}`;
+        const api = `${this.state.url}/articles/${this.props.feed.id}`;
         // const data = {
         //     title: this.state.newTitle,
         //     feed: this.state.newFeed,
