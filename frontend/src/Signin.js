@@ -7,7 +7,8 @@ class SignIn extends React.Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            url: 'https://andteawok.herokuapp.com/api/v1'
         }
     }
 
@@ -17,7 +18,7 @@ class SignIn extends React.Component {
                 method: verb,
                 body: JSON.stringify(data),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 }
             });
             return await response.json();
@@ -44,12 +45,12 @@ class SignIn extends React.Component {
                 email: this.state.email,
                 password: this.state.password
             };
-            const postAPI = 'http://localhost:8000/api/v1/auth/signin';
+            const postAPI = `${this.state.url}/auth/signin`;
             const jsonResponse = await this.makeRequests('POST', postAPI, data, '', true);
             if (jsonResponse.status === 'success') {
                 const {userId, token, administrator} = jsonResponse.data;
                 // const userID = userId; 
-                const getAPI = `http://localhost:8000/api/v1/auth/users/${userId}`;
+                const getAPI = `${this.state.url}/auth/users/${userId}`;
                 
                 const userGetResponse = await this.makeRequests('GET', getAPI, '', token, false);
                 let user;

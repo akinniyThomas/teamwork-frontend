@@ -9,7 +9,8 @@ class OneFeed extends React.Component {
         super(props);
         this.state = {
             comments: [],
-            commentText: ''
+            commentText: '',
+            url: 'https://andteawok.herokuapp.com/api/v1'
         }
         this.makeRequest();
     }
@@ -21,8 +22,8 @@ class OneFeed extends React.Component {
     makeRequest = async () => {
         let api;
         const token = this.props.user.token;
-        if (this.props.feed.feedtype === 'art') api = `http://localhost:8000/api/v1/articles/${this.props.feed.id}`;
-        else api = `http://localhost:8000/api/v1/gifs/${this.props.feed.id}`;
+        if (this.props.feed.feedtype === 'art') api = `${this.state.url}/articles/${this.props.feed.id}`;
+        else api = `${this.state.url}/gifs/${this.props.feed.id}`;
         const response = await fetch(api, {
             method: 'GET',
             // params: JSON.stringify(data),
@@ -43,8 +44,8 @@ class OneFeed extends React.Component {
         e.preventDefault();
         let api;
         const token = this.props.user.token;
-        if (this.props.feed.feedtype === 'art') api = `http://localhost:8000/api/v1/articles/${this.props.feed.id}/comment`;
-        else api = `http://localhost:8000/api/v1/gifs/${this.props.feed.id}/comment`;
+        if (this.props.feed.feedtype === 'art') api = `${this.state.url}/articles/${this.props.feed.id}/comment`;
+        else api = `${this.state.url}/gifs/${this.props.feed.id}/comment`;
         const data = {
             coment: this.state.commentText,
             inappropflag: false,

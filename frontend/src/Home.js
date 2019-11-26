@@ -14,7 +14,8 @@ class Home extends React.Component {
             gifs: [],
             showFeeds: false,
             selectedState: 'articleState',
-            postPage: null
+            postPage: null,
+            url: 'https://andteawok.herokuapp.com/api/v1'
         }
         this.refresher();
     }
@@ -74,7 +75,7 @@ class Home extends React.Component {
     }
 
     getFeeds = async () => {
-        const api = 'http://localhost:8000/api/v1/feed';
+        const api = `${this.state.url}/feed`;
         const token = this.props.user.token;
         // const param = {
         //     userId: this.props.user.userId
@@ -90,7 +91,7 @@ class Home extends React.Component {
     }
 
     getMyArticlesAndGifs = async () => {
-        let api = 'http://localhost:8000/api/v1/articles';
+        let api = `${this.state.url}/articles`;
         const token = this.props.user.token;
         const articlesGotten = await this.makeRequests('GET', api, '', token, false);
         if (articlesGotten.status === 'success') {
@@ -100,7 +101,7 @@ class Home extends React.Component {
         } else if (articlesGotten.error.message === 'no rows') {
             this.setArticle([]);
         }
-        api = 'http://localhost:8000/api/v1/gifs';
+        api = `${this.state.url}/gifs`;
         const gifsGotten = await this.makeRequests('GET', api, '', token, false);
         if (gifsGotten.status === 'success') {
             const gifs = gifsGotten.data;
@@ -117,11 +118,11 @@ class Home extends React.Component {
         let feed; let api; let selectedFile;
         if (artORgif === 'article') {
             feed = feeds;
-            api = 'http://localhost:8000/api/v1/articles';
+            api = `${this.state.url}/articles`;
             selectedFile = null;
         } else {
             feed = '';
-            api = 'http://localhost:8000/api/v1/gifs';
+            api = `${this.state.url}/gifs`;
             selectedFile = selectedFiles;
         }
         const data = {
