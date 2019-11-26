@@ -1,0 +1,21 @@
+.formContainer {
+    display:  flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.comment {
+    background-color: #12E3E3;
+    width: 50%;
+    justify-content: center;
+}
+
+.backHome {
+    color: #12E3E3;
+}
+
+.backHome:hover {
+    cursor: pointer;
+    color: white;
+}

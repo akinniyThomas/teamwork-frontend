@@ -1,0 +1,56 @@
+.formContainer {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: baseline;
+    padding: 40px;
+}
+
+.header, .backHome {
+    color: #12E3E3;
+}
+
+.backHome:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.employmentDate, .gender {
+    background-color: #12E3E3;
+    color: #2e3a3a;
+    /* border: black solid 0.5px; */
+    padding: 1px 30px;
+    margin: 10px auto;
+    text-align: center;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 3fr;
+    border-radius: 10px;
+    width: 33%;
+    min-width: 200px;
+}
+
+.employmentDateBox {
+    background-color: #47ACAC;
+    margin-left: 5px;
+    min-width: 100px;
+    width: 100px;
+    /* color: green; */
+    max-height: 18px;
+    border-radius: 10px;
+}
+
+.butonDiv {
+    /* background-color: #12E3E3; */
+    /* color: #2e3a3a; */
+    /* border: black solid 0.5px; */
+    /* padding: 1px 30px; */
+    margin: 10px auto;
+    text-align: center;
+    /* display: grid; */
+    /* align-items: center; */
+    /* grid-template-columns: 1fr; */
+    border-radius: 10px;
+    /* width: 33%; */
+    /* min-width: 200px; */
+}
